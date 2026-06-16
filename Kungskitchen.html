@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kung's Kitchen — Asian Fusion Buffet, Kokkola</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --red:#7A3B3E;
+  --red-dark:#5E2C2F;
+  --gold:#B9986A;
+  --gold-light:#D4BC92;
+  --ivory:#FAF6EE;
+  --mist:#EDE7D9;
+  --obsidian:#0D0D0D;
+  --charcoal:#1A1A1A;
+  --text-muted:#5A5047;
+}
+html{scroll-behavior:smooth}
+body{background:var(--ivory);color:var(--obsidian);font-family:'Inter',sans-serif;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;background:rgba(13,13,13,0);backdrop-filter:blur(0px);transition:background 0.4s, backdrop-filter 0.4s}
+nav.scrolled{background:rgba(13,13,13,0.96);backdrop-filter:blur(12px)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.12em;color:var(--gold);text-decoration:none}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:rgba(250,246,238,0.75);text-decoration:none;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--red);color:#fff;padding:0.55rem 1.4rem;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;font-weight:600;transition:background 0.2s}
+.nav-cta:hover{background:var(--red-dark)}
+
+/* HERO */
+.hero{min-height:100vh;background:var(--charcoal);position:relative;display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+.hero-stripe{position:absolute;top:0;bottom:0;left:50%;width:3px;background:var(--red);transform:translateX(-50%);z-index:2}
+.hero-left{display:flex;flex-direction:column;justify-content:flex-end;padding:6rem 4rem 5rem;position:relative;z-index:3}
+.hero-eyebrow{font-family:'Bebas Neue',sans-serif;font-size:0.85rem;letter-spacing:0.25em;color:var(--gold);margin-bottom:1.2rem}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(3.5rem,6vw,5.5rem);font-weight:900;line-height:0.95;color:var(--ivory);margin-bottom:1.8rem}
+.hero-title em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:0.95rem;color:rgba(250,246,238,0.6);line-height:1.75;max-width:28rem;margin-bottom:2.5rem}
+.hero-actions{display:flex;gap:1rem;align-items:center}
+.btn-primary{background:var(--red);color:#fff;padding:0.85rem 2.2rem;font-size:0.82rem;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;font-weight:600;transition:background 0.2s,transform 0.2s;display:inline-block}
+.btn-primary:hover{background:var(--red-dark);transform:translateY(-2px)}
+.btn-ghost{color:rgba(250,246,238,0.7);font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.4);padding-bottom:2px;transition:color 0.2s,border-color 0.2s}
+.btn-ghost:hover{color:var(--gold);border-color:var(--gold)}
+.hero-right{position:relative;overflow:hidden}
+.hero-right img{width:100%;height:100%;object-fit:cover;object-position:center;opacity:0.85;display:block;transition:transform 8s ease}
+.hero-right:hover img{transform:scale(1.04)}
+.hero-right-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,13,13,0.55),rgba(196,30,42,0.12))}
+.hero-badge{position:absolute;bottom:3rem;left:2.5rem;background:var(--obsidian);border:1px solid var(--gold);padding:1rem 1.5rem;z-index:5}
+.hero-badge-num{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--gold);line-height:1;display:block}
+.hero-badge-label{font-size:0.72rem;color:rgba(250,246,238,0.6);letter-spacing:0.1em;text-transform:uppercase}
+
+/* MARQUEE */
+.marquee-wrap{background:var(--red);padding:0.8rem 0;overflow:hidden}
+.marquee{display:flex;gap:3rem;white-space:nowrap;animation:scroll 22s linear infinite}
+.marquee-item{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.15em;color:rgba(250,246,238,0.9)}
+.marquee-dot{color:var(--gold-light);margin:0 0.5rem}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* PHILOSOPHY */
+.philosophy{display:grid;grid-template-columns:1fr 1fr;min-height:85vh}
+.philosophy-img{position:relative;overflow:hidden;background:var(--obsidian)}
+.philosophy-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 6s ease}
+.philosophy-img:hover img{transform:scale(1.05)}
+.philosophy-img-caption{position:absolute;bottom:2rem;right:2rem;font-family:'Playfair Display',serif;font-style:italic;font-size:0.8rem;color:rgba(250,246,238,0.55);text-align:right}
+.philosophy-content{background:var(--mist);padding:5rem 4.5rem;display:flex;flex-direction:column;justify-content:center}
+.section-label{font-family:'Bebas Neue',sans-serif;font-size:0.78rem;letter-spacing:0.25em;color:var(--red);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.8rem}
+.section-label::before{content:'';display:block;width:2rem;height:1px;background:var(--red)}
+.philosophy-heading{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,3.2rem);font-weight:700;line-height:1.2;color:var(--obsidian);margin-bottom:1.8rem}
+.philosophy-heading em{font-style:italic;color:var(--red)}
+.philosophy-body{font-size:0.95rem;line-height:1.85;color:var(--text-muted);margin-bottom:1.6rem}
+.philosophy-stat-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;border-top:1px solid rgba(90,80,71,0.2);padding-top:2rem}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:var(--obsidian);line-height:1}
+.stat-label{font-size:0.75rem;color:var(--text-muted);letter-spacing:0.06em;text-transform:uppercase;margin-top:0.2rem}
+
+/* BUFFET MENU */
+.buffet{background:var(--obsidian);padding:6rem 0}
+.buffet-inner{max-width:1100px;margin:0 auto;padding:0 2.5rem}
+.buffet-header{text-align:center;margin-bottom:4rem}
+.buffet-header .section-label{justify-content:center}
+.buffet-header .section-label::before{display:none}
+.buffet-heading{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4vw,3.5rem);font-weight:900;color:var(--ivory);margin-bottom:1rem}
+.buffet-heading em{font-style:italic;color:var(--gold)}
+.buffet-subhead{font-size:0.95rem;color:rgba(250,246,238,0.5);max-width:38rem;margin:0 auto}
+.buffet-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(201,168,76,0.12)}
+.buffet-card{background:var(--charcoal);overflow:hidden;position:relative;transition:background 0.3s}
+.buffet-card:hover{background:#1f1f1f}
+.buffet-card-img{width:100%;height:200px;object-fit:cover;opacity:0.75;transition:opacity 0.4s,transform 0.5s}
+.buffet-card:hover .buffet-card-img{opacity:0.9;transform:scale(1.04)}
+.buffet-card-body{padding:1.8rem 2rem}
+.buffet-card-icon{font-size:1.6rem;margin-bottom:0.9rem;display:block}
+.buffet-card-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--ivory);margin-bottom:0.5rem}
+.buffet-card-desc{font-size:0.82rem;color:rgba(250,246,238,0.45);line-height:1.7}
+.buffet-card-accent{position:absolute;bottom:0;left:0;width:100%;height:2px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform 0.35s}
+.buffet-card:hover .buffet-card-accent{transform:scaleX(1)}
+
+/* EXPERIENCE STRIP */
+.exp-strip{background:var(--red);padding:4rem 2.5rem;display:flex;align-items:center;justify-content:center;gap:4rem;flex-wrap:wrap}
+.exp-item{text-align:center}
+.exp-num{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--ivory);line-height:1}
+.exp-label{font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(250,246,238,0.75);margin-top:0.3rem}
+.exp-divider{width:1px;height:3rem;background:rgba(250,246,238,0.25)}
+
+/* GALLERY */
+.gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:300px 300px;gap:3px;background:var(--mist)}
+.gallery-item{overflow:hidden;position:relative;background:var(--obsidian)}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.65s ease;display:block}
+.gallery-item:hover img{transform:scale(1.07)}
+.gallery-item.tall{grid-row:span 2}
+.gallery-overlay{position:absolute;inset:0;background:rgba(13,13,13,0);transition:background 0.3s;display:flex;align-items:flex-end;padding:1.4rem}
+.gallery-item:hover .gallery-overlay{background:rgba(13,13,13,0.4)}
+.gallery-tag{font-family:'Bebas Neue',sans-serif;font-size:0.85rem;letter-spacing:0.2em;color:var(--ivory);opacity:0;transform:translateY(10px);transition:all 0.35s}
+.gallery-item:hover .gallery-tag{opacity:1;transform:translateY(0)}
+
+/* HOURS + VISIT */
+.visit{display:grid;grid-template-columns:1fr 1fr}
+.visit-map{background:var(--charcoal);position:relative;min-height:420px;overflow:hidden}
+.visit-map iframe{width:100%;height:100%;border:none;filter:grayscale(0.3) contrast(0.9)}
+.visit-info{background:var(--ivory);padding:5rem 4rem;display:flex;flex-direction:column;justify-content:center}
+.hours-grid{margin:2rem 0}
+.hours-row{display:flex;justify-content:space-between;padding:0.8rem 0;border-bottom:1px solid rgba(90,80,71,0.12);font-size:0.88rem}
+.hours-day{color:var(--text-muted);font-weight:500}
+.hours-time{color:var(--obsidian);font-weight:600;font-family:'Bebas Neue',sans-serif;font-size:0.95rem;letter-spacing:0.06em}
+.visit-address{margin-top:1.5rem;font-size:0.85rem;color:var(--text-muted);line-height:1.8}
+.visit-address strong{display:block;font-size:1rem;color:var(--obsidian);font-weight:600;margin-bottom:0.2rem}
+.visit-phone{margin-top:1rem;display:inline-flex;align-items:center;gap:0.5rem;text-decoration:none;color:var(--red);font-weight:600;font-size:0.9rem;border-bottom:1px solid transparent;transition:border-color 0.2s}
+.visit-phone:hover{border-color:var(--red)}
+
+/* TESTIMONIALS */
+.testimonials{background:var(--charcoal);padding:6rem 2.5rem}
+.testi-inner{max-width:1000px;margin:0 auto}
+.testi-header{margin-bottom:3.5rem}
+.testi-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem}
+.testi-card{background:rgba(250,246,238,0.04);border:1px solid rgba(201,168,76,0.15);padding:2rem;position:relative;transition:border-color 0.3s}
+.testi-card:hover{border-color:rgba(201,168,76,0.4)}
+.testi-stars{display:flex;gap:0.25rem;margin-bottom:1.2rem;font-size:0.85rem;color:var(--gold)}
+.testi-quote{font-family:'Playfair Display',serif;font-style:italic;font-size:0.95rem;color:rgba(250,246,238,0.75);line-height:1.75;margin-bottom:1.5rem}
+.testi-author{font-family:'Bebas Neue',sans-serif;font-size:0.8rem;letter-spacing:0.12em;color:var(--gold)}
+.testi-card::before{content:'\201C';font-family:'Playfair Display',serif;font-size:5rem;color:rgba(201,168,76,0.08);position:absolute;top:0.5rem;right:1.2rem;line-height:1}
+
+/* RESERVATION BANNER */
+.reservation{background:var(--mist);padding:5rem 2.5rem;text-align:center;border-top:3px solid var(--red)}
+.res-heading{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,3rem);font-weight:700;color:var(--obsidian);margin-bottom:0.8rem}
+.res-heading em{font-style:italic;color:var(--red)}
+.res-sub{font-size:0.95rem;color:var(--text-muted);margin-bottom:2.5rem}
+.res-actions{display:flex;gap:1.2rem;justify-content:center;align-items:center;flex-wrap:wrap}
+.res-phone{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--obsidian);letter-spacing:0.08em;text-decoration:none;transition:color 0.2s}
+.res-phone:hover{color:var(--red)}
+
+/* FOOTER */
+footer{background:var(--obsidian);padding:3rem 2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.12em;color:var(--gold)}
+.footer-links{display:flex;gap:1.8rem;list-style:none}
+.footer-links a{color:rgba(250,246,238,0.4);text-decoration:none;font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.2s}
+.footer-links a:hover{color:var(--gold)}
+.footer-copy{font-size:0.72rem;color:rgba(250,246,238,0.25);letter-spacing:0.06em}
+
+/* SCROLL ANIMATIONS */
+.fade-up{opacity:0;transform:translateY(2rem);transition:opacity 0.75s,transform 0.75s}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+/* IMAGE LOADING */
+img[loading]{background:var(--charcoal)}
+
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr}.hero-right{display:none}
+  .hero-stripe{display:none}
+  .philosophy,.visit{grid-template-columns:1fr}
+  .buffet-grid{grid-template-columns:1fr}
+  .gallery{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .gallery-item.tall{grid-row:span 1}
+  .testi-grid{grid-template-columns:1fr}
+  nav{padding:1rem 1.2rem}
+  .nav-links{display:none}
+  .exp-strip{gap:2rem}
+  .exp-divider{display:none}
+  .buffet-card-img{height:160px}
+}
+</style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <a href="#" class="nav-logo">Kung's Kitchen</a>
+  <ul class="nav-links">
+    <li><a href="#philosophy">Our Story</a></li>
+    <li><a href="#buffet">Menu</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+  <a href="tel:+35868220122" class="nav-cta">Reserve a Table</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-stripe"></div>
+  <div class="hero-left">
+    <span class="hero-eyebrow">Asian Fusion Buffet · Kokkola, Finland</span>
+    <h1 class="hero-title">Where Asia<br><em>Meets Your</em><br>Table</h1>
+    <p class="hero-sub">A daily feast of over 40 dishes spanning Chinese, Thai, Japanese and Southeast Asian traditions — prepared fresh, served with pride since the day we opened.</p>
+    <div class="hero-actions">
+      <a href="#buffet" class="btn-primary">Explore the Buffet</a>
+      <a href="#visit" class="btn-ghost">Opening Hours →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <!-- Premium Asian buffet spread photography -->
+    <img src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=900&q=85&fit=crop&auto=format" 
+         alt="Asian cuisine spread" loading="eager">
+    <div class="hero-right-overlay"></div>
+    <div class="hero-badge">
+      <span class="hero-badge-num">98%</span>
+      <span class="hero-badge-label">Recommend us · 209 reviews</span>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee">
+    <span class="marquee-item">Asian Fusion Buffet</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Kokkola, Finland</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">40+ Fresh Dishes Daily</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Mon–Sat 10:45–20:00</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Sun 12:00–18:00</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Chinese · Thai · Japanese</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Asian Fusion Buffet</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Kokkola, Finland</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">40+ Fresh Dishes Daily</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Mon–Sat 10:45–20:00</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Sun 12:00–18:00</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Chinese · Thai · Japanese</span><span class="marquee-dot">◆</span>
+  </div>
+</div>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-img">
+    <!-- Chef/kitchen craftsmanship -->
+    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&q=85&fit=crop&auto=format"
+         alt="Kitchen craftsmanship" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
+    <div class="philosophy-img-caption">Fresh. Honest. Abundant.</div>
+  </div>
+  <div class="philosophy-content">
+    <span class="section-label">Our Philosophy</span>
+    <h2 class="philosophy-heading">Cooking is an act<br>of <em>generosity</em></h2>
+    <p class="philosophy-body">At Kung's Kitchen, every dish that arrives at the buffet table represents hours of careful preparation — sauces reduced low and slow, vegetables cut to order, proteins marinated overnight. We believe in feeding people well, not feeding them just enough.</p>
+    <p class="philosophy-body">From the aromatic Thai curries to the delicate Japanese rolls, each station is a window into a distinct culinary tradition — and we guard those traditions with respect.</p>
+    <div class="philosophy-stat-row">
+      <div class="stat-item">
+        <div class="stat-num">40+</div>
+        <div class="stat-label">Dishes daily</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">98%</div>
+        <div class="stat-label">Guest satisfaction</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">7</div>
+        <div class="stat-label">Days open</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Asian cuisines</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUFFET MENU -->
+<section class="buffet" id="buffet">
+  <div class="buffet-inner">
+    <div class="buffet-header fade-up">
+      <span class="section-label">The Buffet</span>
+      <h2 class="buffet-heading">A world of flavour,<br><em>under one roof</em></h2>
+      <p class="buffet-subhead">Our rotating selection spans four Asian cuisines — every visit brings something new. Below is a taste of what awaits.</p>
+    </div>
+    <div class="buffet-grid fade-up">
+
+      <div class="buffet-card">
+        <img class="buffet-card-img" 
+             src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=600&q=80&fit=crop&auto=format" 
+             alt="Chinese dumplings and spring rolls" loading="lazy">
+        <div class="buffet-card-body">
+          <span class="buffet-card-icon">🥢</span>
+          <div class="buffet-card-name">Chinese Classics</div>
+          <p class="buffet-card-desc">Wok-fried rice, Peking-style duck, spring rolls, dim sum, honey pork ribs and our signature sweet-sour glazes.</p>
+        </div>
+        <div class="buffet-card-accent"></div>
+      </div>
+
+      <div class="buffet-card">
+        <img class="buffet-card-img" 
+             src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=600&q=80&fit=crop&auto=format" 
+             alt="Thai green curry" loading="lazy">
+        <div class="buffet-card-body">
+          <span class="buffet-card-icon">🌿</span>
+          <div class="buffet-card-name">Thai Selections</div>
+          <p class="buffet-card-desc">Green and red curries, pad thai, tom kha soup, basil chicken and fresh papaya salad with tamarind dressing.</p>
+        </div>
+        <div class="buffet-card-accent"></div>
+      </div>
+
+      <div class="buffet-card">
+        <img class="buffet-card-img" 
+             src="https://images.unsplash.com/photo-1553621042-f6e147245754?w=600&q=80&fit=crop&auto=format" 
+             alt="Japanese sushi rolls" loading="lazy">
+        <div class="buffet-card-body">
+          <span class="buffet-card-icon">🍱</span>
+          <div class="buffet-card-name">Japanese Station</div>
+          <p class="buffet-card-desc">Maki rolls, edamame, teriyaki glazes, miso soup and tempura — light, precise and perfectly balanced.</p>
+        </div>
+        <div class="buffet-card-accent"></div>
+      </div>
+
+      <div class="buffet-card">
+        <img class="buffet-card-img" 
+             src="https://images.unsplash.com/photo-1585032226651-759b368d7246?w=600&q=80&fit=crop&auto=format" 
+             alt="Hot wok dishes" loading="lazy">
+        <div class="buffet-card-body">
+          <span class="buffet-card-icon">🔥</span>
+          <div class="buffet-card-name">Hot Dishes</div>
+          <p class="buffet-card-desc">Rotating daily specials — braised beef, seafood wok, spicy tofu and seasonal vegetables in rich house-made sauces.</p>
+        </div>
+        <div class="buffet-card-accent"></div>
+      </div>
+
+      <div class="buffet-card">
+        <img class="buffet-card-img" 
+             src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&q=80&fit=crop&auto=format" 
+             alt="Fresh salad and vegetables" loading="lazy">
+        <div class="buffet-card-body">
+          <span class="buffet-card-icon">🥗</span>
+          <div class="buffet-card-name">Fresh &amp; Light</div>
+          <p class="buffet-card-desc">Salad bar with Asian dressings, fresh fruit, pickled vegetables and cleansing broth soups.</p>
+        </div>
+        <div class="buffet-card-accent"></div>
+      </div>
+
+      <div class="buffet-card">
+        <img class="buffet-card-img" 
+             src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&q=80&fit=crop&auto=format" 
+             alt="Asian desserts" loading="lazy">
+        <div class="buffet-card-body">
+          <span class="buffet-card-icon">🍮</span>
+          <div class="buffet-card-name">Desserts</div>
+          <p class="buffet-card-desc">Mango pudding, lychee jelly, sesame balls and seasonal sweets to close your meal on a gentle note.</p>
+        </div>
+        <div class="buffet-card-accent"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="exp-strip fade-up">
+  <div class="exp-item">
+    <div class="exp-num">10:45</div>
+    <div class="exp-label">Opens Mon–Sat</div>
+  </div>
+  <div class="exp-divider"></div>
+  <div class="exp-item">
+    <div class="exp-num">20:00</div>
+    <div class="exp-label">Last service</div>
+  </div>
+  <div class="exp-divider"></div>
+  <div class="exp-item">
+    <div class="exp-num">209</div>
+    <div class="exp-label">Five-star reviews</div>
+  </div>
+  <div class="exp-divider"></div>
+  <div class="exp-item">
+    <div class="exp-num">4</div>
+    <div class="exp-label">Asian cuisines</div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="gallery">
+    <!-- Large left: wok cooking action -->
+    <div class="gallery-item tall">
+      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=700&q=85&fit=crop&auto=format" 
+           alt="The kitchen" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-tag">THE KITCHEN</span></div>
+    </div>
+    <!-- Top right: fresh herbs -->
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=500&q=80&fit=crop&auto=format" 
+           alt="Fresh herbs and ingredients" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-tag">FRESH HERBS</span></div>
+    </div>
+    <!-- Top far right: dim sum -->
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=500&q=80&fit=crop&auto=format" 
+           alt="Dim sum" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-tag">DIM SUM</span></div>
+    </div>
+    <!-- Bottom right: buffet spread -->
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=500&q=80&fit=crop&auto=format" 
+           alt="The buffet spread" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-tag">THE SPREAD</span></div>
+    </div>
+    <!-- Bottom far right: plated dish -->
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=500&q=80&fit=crop&auto=format" 
+           alt="Plated dish" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-tag">PLATED</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials fade-up">
+  <div class="testi-inner">
+    <div class="testi-header">
+      <span class="section-label" style="color:var(--gold)">What Guests Say</span>
+      <h2 style="font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--ivory)">Voices from the table</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"The best lunch in Kokkola, without question. Fresh, hot and endlessly varied — we come every week."</p>
+        <div class="testi-author">— Local Regular</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"You can tell the kitchen takes real pride in this. The curries are extraordinary and the spring rolls are always perfectly crisp."</p>
+        <div class="testi-author">— Verified Review</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Exceptional value, warm atmosphere and a selection that puts bigger city restaurants to shame. A genuine gem."</p>
+        <div class="testi-author">— Facebook Review</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT + HOURS -->
+<section class="visit" id="visit">
+  <div class="visit-map">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1852.0!2d23.1285!3d63.8378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zUGl0a8OkbnlzaWxsYW5rYXR1IDIz!5e0!3m2!1sen!2sfi!4v1"
+      width="100%" height="100%" style="border:0;filter:grayscale(20%) contrast(0.9)" allowfullscreen="" loading="lazy">
+    </iframe>
+  </div>
+  <div class="visit-info">
+    <span class="section-label">Find Us</span>
+    <h2 style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--obsidian);margin-bottom:0.5rem">Come hungry.<br>Leave satisfied.</h2>
+    <div class="hours-grid">
+      <div class="hours-row">
+        <span class="hours-day">Monday – Saturday</span>
+        <span class="hours-time">10:45 – 20:00</span>
+      </div>
+      <div class="hours-row">
+        <span class="hours-day">Sunday</span>
+        <span class="hours-time">12:00 – 18:00</span>
+      </div>
+      <div class="hours-row">
+        <span class="hours-day">Buffet service</span>
+        <span class="hours-time">All Day</span>
+      </div>
+    </div>
+    <div class="visit-address">
+      <strong>Kung's Kitchen</strong>
+      Pitkänsillankatu 23<br>
+      67100 Kokkola, Finland
+    </div>
+    <a href="tel:+35868220122" class="visit-phone">📞 +358 6 8220122</a>
+  </div>
+</section>
+
+<!-- RESERVATION BANNER -->
+<section class="reservation fade-up">
+  <span class="section-label" style="justify-content:center;margin-bottom:1rem">Reserve a Seat</span>
+  <h2 class="res-heading">Ready to join us<br>at the <em>table?</em></h2>
+  <p class="res-sub">Walk-ins always welcome — or call ahead to secure your spot during peak hours.</p>
+  <div class="res-actions">
+    <a href="tel:+35868220122" class="res-phone">+358 6 8220122</a>
+    <a href="#visit" class="btn-primary">See Opening Hours</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Kung's Kitchen</div>
+  <ul class="footer-links">
+    <li><a href="#philosophy">Story</a></li>
+    <li><a href="#buffet">Menu</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 Kung's Kitchen · Kokkola, Finland</div>
+</footer>
+
+<script>
+// Scroll-triggered fade-ins
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') })
+}, {threshold: 0.12})
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el))
+
+// Nav scroll state
+const nav = document.getElementById('main-nav')
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60)
+}, {passive: true})
+</script>
+</body>
+</html>
