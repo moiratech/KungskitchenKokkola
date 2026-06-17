@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Konetekniikka Peltokangas OY — Kylmäkoneasennus, sähköasennus ja projektisuunnittelu Etelä-Pohjanmaalla. S2-sähköluvat, yli 3 kg kylmäaineluvat.">
+<title>Konetekniikka Peltokangas OY — Kylmäkoneet & Sähkö</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --dark:    #0D1B26;
+  --steel:   #1C2B3A;
+  --mid:     #2A3D4F;
+  --slate:   #6B7F8E;
+  --ice:     #D4EBF2;
+  --frost:   #F5F9FA;
+  --yellow:  #F0A500;
+  --yellow2: #FFB922;
+  --white:   #FFFFFF;
+  --divider: rgba(255,255,255,0.07);
+  --fd: 'Rajdhani', sans-serif;
+  --fb: 'Source Sans 3', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--fb); background: var(--dark); color: var(--frost); font-size: 16px; line-height: 1.6; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 3rem; height: 60px;
+  background: rgba(13,27,38,0.95);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--divider);
+}
+.logo {
+  font-family: var(--fd); font-size: 1.1rem; font-weight: 700;
+  color: var(--white); text-decoration: none; letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.logo span { color: var(--yellow); }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-size: 0.8rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--slate); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-phone {
+  font-family: var(--fd); font-size: 1rem; font-weight: 700;
+  color: var(--yellow); text-decoration: none; letter-spacing: 0.04em;
+  border: 1px solid rgba(240,165,0,0.35); padding: 0.35rem 0.9rem;
+  border-radius: 3px; transition: all 0.2s;
+}
+.nav-phone:hover { background: rgba(240,165,0,0.12); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh; padding-top: 60px;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; overflow: hidden;
+  background: var(--dark);
+}
+.hero-bg-lines {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0.035;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(255,255,255,1) 60px),
+    repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(255,255,255,1) 60px);
+}
+.hero-inner {
+  position: relative; z-index: 2;
+  padding: 4rem 3rem 4rem 3.5rem;
+  max-width: 780px;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--yellow);
+  margin-bottom: 1.75rem;
+}
+.eyebrow-line { width: 32px; height: 1px; background: var(--yellow); }
+.hero-heading {
+  font-family: var(--fd); font-weight: 700;
+  font-size: clamp(3rem, 6.5vw, 5.5rem);
+  line-height: 0.95; text-transform: uppercase;
+  color: var(--white); letter-spacing: -0.01em;
+  margin-bottom: 1.5rem;
+}
+.hero-heading em { font-style: normal; color: var(--yellow); }
+.hero-sub {
+  font-size: 1.05rem; color: var(--slate); line-height: 1.7;
+  max-width: 480px; margin-bottom: 2.5rem;
+}
+.hero-certs {
+  display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2.5rem;
+}
+.cert-tag {
+  font-size: 0.72rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.07em; padding: 0.3rem 0.7rem;
+  border: 1px solid rgba(240,165,0,0.3); border-radius: 2px;
+  color: var(--yellow); background: rgba(240,165,0,0.06);
+}
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.8rem 1.6rem; border-radius: 3px;
+  font-family: var(--fd); font-size: 1rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: all 0.18s;
+}
+.btn-yellow { background: var(--yellow); color: var(--dark); }
+.btn-yellow:hover { background: var(--yellow2); }
+.btn-ghost {
+  background: transparent; color: var(--slate);
+  border: 1px solid rgba(107,127,142,0.3);
+}
+.btn-ghost:hover { color: var(--white); border-color: rgba(107,127,142,0.6); }
+
+/* Signature element: cold|current divider */
+.sig-divider {
+  position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+  width: 38%; height: 100%; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; gap: 0;
+  pointer-events: none; opacity: 0.06;
+}
+.sig-snowflake {
+  font-size: 14rem; line-height: 1; color: var(--ice);
+  position: absolute; right: 6rem; top: 50%; transform: translateY(-55%);
+  opacity: 0.055; pointer-events: none;
+  font-family: serif;
+}
+
+/* ── TRUST BAR ── */
+.trust-bar {
+  background: var(--steel); border-top: 1px solid var(--divider);
+  border-bottom: 1px solid var(--divider);
+  padding: 1.5rem 3rem;
+  display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap;
+  gap: 1rem;
+}
+.trust-item { text-align: center; }
+.trust-num {
+  font-family: var(--fd); font-size: 1.9rem; font-weight: 700;
+  color: var(--yellow); line-height: 1;
+}
+.trust-label {
+  font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.07em;
+  color: var(--slate); margin-top: 0.15rem;
+}
+.trust-sep { width: 1px; height: 36px; background: var(--divider); }
+
+/* ── SHARED SECTION ── */
+section { padding: 5rem 3rem; }
+.sec-tag {
+  font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.14em; color: var(--yellow);
+  border-bottom: 2px solid var(--yellow); display: inline-block;
+  padding-bottom: 0.2rem; margin-bottom: 1rem;
+}
+.sec-heading {
+  font-family: var(--fd); font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700; text-transform: uppercase; line-height: 1;
+  color: var(--white); margin-bottom: 0.85rem;
+}
+.sec-sub { font-size: 0.95rem; color: var(--slate); max-width: 500px; line-height: 1.7; }
+
+/* ── SERVICES ── */
+.services { background: var(--steel); border-top: 1px solid var(--divider); border-bottom: 1px solid var(--divider); }
+.services-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--divider);
+  margin-top: 3rem; border: 1px solid var(--divider); border-radius: 4px; overflow: hidden;
+}
+.service-card {
+  background: var(--mid); padding: 2rem 1.75rem;
+  transition: background 0.2s; cursor: default;
+}
+.service-card:hover { background: #2E4255; }
+.sc-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+.sc-title {
+  font-family: var(--fd); font-size: 1.25rem; font-weight: 700;
+  text-transform: uppercase; color: var(--white); margin-bottom: 0.6rem;
+  letter-spacing: 0.03em;
+}
+.sc-desc { font-size: 0.875rem; color: var(--slate); line-height: 1.65; }
+.sc-list {
+  list-style: none; margin-top: 1rem;
+  display: flex; flex-direction: column; gap: 0.3rem;
+}
+.sc-list li {
+  font-size: 0.82rem; color: #8FA3B2;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.sc-list li::before {
+  content: '—'; color: var(--yellow); font-size: 0.7rem;
+}
+
+/* ── TEAM ── */
+.team-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+  margin-top: 3rem;
+}
+.team-card {
+  background: var(--steel); border: 1px solid var(--divider);
+  border-radius: 4px; padding: 2rem;
+}
+.team-name {
+  font-family: var(--fd); font-size: 1.5rem; font-weight: 700;
+  color: var(--white); text-transform: uppercase; margin-bottom: 0.3rem;
+}
+.team-role {
+  font-size: 0.78rem; color: var(--yellow); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.25rem;
+}
+.team-quals {
+  display: flex; flex-direction: column; gap: 0.4rem;
+  border-top: 1px solid var(--divider); padding-top: 1.25rem;
+}
+.qual-row {
+  display: flex; align-items: flex-start; gap: 0.6rem;
+  font-size: 0.85rem; color: var(--slate);
+}
+.qual-row::before {
+  content: '▸'; color: var(--yellow); font-size: 0.65rem;
+  margin-top: 0.22rem; flex-shrink: 0;
+}
+.cert-strip {
+  display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.25rem;
+}
+.cert-pill {
+  font-size: 0.7rem; font-weight: 600; padding: 0.2rem 0.55rem;
+  border-radius: 2px; text-transform: uppercase; letter-spacing: 0.05em;
+  background: rgba(240,165,0,0.1); color: var(--yellow);
+  border: 1px solid rgba(240,165,0,0.25);
+}
+
+/* ── HOW ── */
+.how { background: var(--steel); border-top: 1px solid var(--divider); border-bottom: 1px solid var(--divider); }
+.how-steps {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  margin-top: 3rem; border: 1px solid var(--divider); border-radius: 4px; overflow: hidden;
+  gap: 1px; background: var(--divider);
+}
+.how-step {
+  background: var(--mid); padding: 1.75rem 1.5rem;
+}
+.step-n {
+  font-family: var(--fd); font-size: 2.5rem; font-weight: 700;
+  color: var(--yellow); opacity: 0.25; line-height: 1; margin-bottom: 0.75rem;
+}
+.step-ico { font-size: 1.4rem; margin-bottom: 0.5rem; display: block; }
+.step-t {
+  font-family: var(--fd); font-size: 1rem; font-weight: 700;
+  text-transform: uppercase; color: var(--white); margin-bottom: 0.4rem;
+}
+.step-d { font-size: 0.82rem; color: var(--slate); line-height: 1.6; }
+
+/* ── CONTACT ── */
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1.1fr; gap: 4rem; align-items: start;
+}
+.contact-block {
+  background: var(--steel); border: 1px solid var(--divider);
+  border-radius: 4px; padding: 1.5rem;
+  display: flex; align-items: center; gap: 1rem; margin-top: 1.5rem;
+}
+.cb-icon {
+  width: 42px; height: 42px; border-radius: 3px;
+  background: rgba(240,165,0,0.1);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; flex-shrink: 0;
+}
+.cb-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--slate); }
+.cb-value { font-size: 1rem; font-weight: 600; color: var(--white); }
+.cb-value a { color: var(--yellow); text-decoration: none; }
+.cb-value a:hover { text-decoration: underline; }
+
+.form-wrap {
+  background: var(--steel); border: 1px solid var(--divider);
+  border-radius: 4px; padding: 2.25rem;
+}
+.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+.fg { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
+.fg label {
+  font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.09em; color: var(--slate);
+}
+.fg input, .fg select, .fg textarea {
+  background: rgba(13,27,38,0.7); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 3px; padding: 0.65rem 0.85rem;
+  font-family: var(--fb); font-size: 0.9rem; color: var(--white); outline: none;
+  transition: border-color 0.2s;
+}
+.fg input::placeholder, .fg textarea::placeholder { color: var(--slate); }
+.fg select option { background: var(--dark); }
+.fg input:focus, .fg select:focus, .fg textarea:focus {
+  border-color: rgba(240,165,0,0.45);
+}
+.fg textarea { resize: vertical; min-height: 90px; }
+.form-submit {
+  width: 100%; padding: 0.85rem; margin-top: 0.5rem;
+  font-family: var(--fd); font-size: 1.05rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.07em;
+  background: var(--yellow); color: var(--dark);
+  border: none; border-radius: 3px; cursor: pointer; transition: background 0.18s;
+}
+.form-submit:hover { background: var(--yellow2); }
+
+/* ── AREA ── */
+.area-section { background: var(--steel); border-top: 1px solid var(--divider); }
+.area-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; align-items: start; }
+.map-placeholder {
+  background: var(--mid); border: 1px solid var(--divider);
+  border-radius: 4px; height: 280px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 0.5rem; color: var(--slate);
+}
+.map-placeholder span { font-size: 2.5rem; }
+.map-placeholder p { font-size: 0.85rem; text-align: center; line-height: 1.5; }
+.area-towns {
+  display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;
+}
+.town-tag {
+  font-size: 0.78rem; padding: 0.25rem 0.6rem;
+  background: rgba(240,165,0,0.07); color: var(--yellow);
+  border: 1px solid rgba(240,165,0,0.2); border-radius: 2px;
+  font-weight: 500;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: #060F17; border-top: 1px solid var(--divider);
+  padding: 3rem 3rem 1.75rem;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 3rem; margin-bottom: 2.5rem;
+}
+.footer-col-title {
+  font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--slate); margin-bottom: 0.85rem;
+}
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.footer-links a {
+  font-size: 0.875rem; color: var(--slate); text-decoration: none; transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--white); }
+.footer-brand .logo { display: inline-block; margin-bottom: 0.85rem; }
+.footer-desc { font-size: 0.85rem; color: var(--slate); line-height: 1.65; max-width: 240px; }
+.footer-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 1.75rem; border-top: 1px solid var(--divider);
+  font-size: 0.78rem; color: var(--slate); flex-wrap: wrap; gap: 0.5rem;
+}
+.ytunnus { color: rgba(107,127,142,0.6); }
+
+/* ── STICKY ── */
+.sticky { position: fixed; bottom: 1.25rem; right: 1.25rem; z-index: 200; }
+.sticky a {
+  display: flex; align-items: center; gap: 0.45rem;
+  background: var(--yellow); color: var(--dark);
+  font-family: var(--fd); font-size: 0.9rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  padding: 0.7rem 1.1rem; border-radius: 3px;
+  text-decoration: none; box-shadow: 0 4px 18px rgba(0,0,0,0.5);
+  transition: transform 0.15s;
+}
+.sticky a:hover { transform: translateY(-2px); }
+
+/* ── RESPONSIVE ── */
+@media(max-width:860px){
+  nav { padding: 0 1.5rem; }
+  .nav-links { display: none; }
+  section { padding: 3.5rem 1.5rem; }
+  .hero-inner { padding: 3rem 1.5rem; }
+  .services-grid { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: 1fr; }
+  .how-steps { grid-template-columns: 1fr 1fr; }
+  .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .area-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .form-row-2 { grid-template-columns: 1fr; }
+  .trust-sep { display: none; }
+  .sig-snowflake { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">Peltokangas <span>Kylmäkoneet</span></a>
+  <ul class="nav-links">
+    <li><a href="#palvelut">Palvelut</a></li>
+    <li><a href="#tiimi">Tiimi</a></li>
+    <li><a href="#alue">Palvelualue</a></li>
+    <li><a href="#yhteys">Yhteydenotto</a></li>
+  </ul>
+  <a href="tel:0407040198" class="nav-phone">040 704 0198</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg-lines"></div>
+  <div class="sig-snowflake">❄</div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="eyebrow-line"></span>
+      Konetekniikka Peltokangas OY · Karvala
+    </div>
+    <h1 class="hero-heading">
+      Kylmä.<br>
+      Virta.<br>
+      <em>Hallinnassa.</em>
+    </h1>
+    <p class="hero-sub">Kylmäkoneasennusta, sähkösuunnittelua ja projektijohtamista Etelä-Pohjanmaalla — lentokonehuollosta teollisuuteen. Kaksi luvallista ammattilaista, yksi yhteydenotto.</p>
+    <div class="hero-certs">
+      <span class="cert-tag">S2 Sähköluvat</span>
+      <span class="cert-tag">Yli 3 kg kylmäaineluvat</span>
+      <span class="cert-tag">Y-tunnus 2758778-8</span>
+      <span class="cert-tag">Suunnittelu & Asennus</span>
+    </div>
+    <div class="hero-actions">
+      <a href="#yhteys" class="btn btn-yellow">Pyydä tarjous →</a>
+      <a href="tel:0407040198" class="btn btn-ghost">📞 040 704 0198</a>
+    </div>
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">
+    <div class="trust-num">2</div>
+    <div class="trust-label">Luvallista asentajaa</div>
+  </div>
+  <div class="trust-sep"></div>
+  <div class="trust-item">
+    <div class="trust-num">40+</div>
+    <div class="trust-label">Vuotta kokemusta</div>
+  </div>
+  <div class="trust-sep"></div>
+  <div class="trust-item">
+    <div class="trust-num">3</div>
+    <div class="trust-label">Erikoisalaa</div>
+  </div>
+  <div class="trust-sep"></div>
+  <div class="trust-item">
+    <div class="trust-num">S2</div>
+    <div class="trust-label">Sähköluvat</div>
+  </div>
+  <div class="trust-sep"></div>
+  <div class="trust-item">
+    <div class="trust-num">3 kg+</div>
+    <div class="trust-label">Kylmäaineluvat</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="palvelut" class="services">
+  <div class="sec-tag">Palvelut</div>
+  <h2 class="sec-heading">Mitä teemme</h2>
+  <p class="sec-sub">Lentokoneista maansiirtokoneisiin — hallitsemme koneet kuin koneet. Suunnittelu, asennus ja projektin hallinta saman katon alta.</p>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="sc-icon">❄️</span>
+      <div class="sc-title">Kylmäkoneasennus</div>
+      <div class="sc-desc">Lisensoitu kylmäasennus yli 3 kg kylmäaineluvin. Kaupallisesta jäähdytyksestä teollisuuden prosessikylmään.</div>
+      <ul class="sc-list">
+        <li>Kylmälaitteiden asennus ja huolto</li>
+        <li>Ilmalämpöpumput</li>
+        <li>Prosessijäähdytys</li>
+        <li>Vuototestaukset ja täytöt</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <span class="sc-icon">⚡</span>
+      <div class="sc-title">Sähköasennus</div>
+      <div class="sc-desc">S2-sähköluvin toteutettu sähköasennus — pienkiinteistöistä tuotantotiloihin. Suunnittelu ja toteutus.</div>
+      <ul class="sc-list">
+        <li>Kiinteistöjen sähköistys</li>
+        <li>Automaatioasennukset</li>
+        <li>Sähkötarkastukset</li>
+        <li>Teollisuuden sähkötyöt</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <span class="sc-icon">⚙️</span>
+      <div class="sc-title">Konetekniikka & Projektijohtaminen</div>
+      <div class="sc-desc">Insinööritason suunnittelu, projektikoordinointi ja tekninen konsultointi vaativiin kohteisiin.</div>
+      <ul class="sc-list">
+        <li>Tekninen suunnittelu</li>
+        <li>Projektin hallinta</li>
+        <li>Lentokonehuollon perusosaaminen</li>
+        <li>Maatalous- ja työkoneet</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="tiimi">
+  <div class="sec-tag">Tiimi</div>
+  <h2 class="sec-heading">Ammattilaiset</h2>
+  <p class="sec-sub">Kaksi sukupolvea teknistä osaamista. Ei alihankkijoita — työn tekee aina sama henkilö joka siitä sovitaan.</p>
+
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-name">Niko Peltokangas</div>
+      <div class="team-role">Kylmäasentaja · Sähköasentaja · Insinööri</div>
+      <div class="team-quals">
+        <div class="qual-row">Ylempi automaatioteknologian insinööri (AMK)</div>
+        <div class="qual-row">Kylmäasentaja — yli 3 kg kylmäaineluvat</div>
+        <div class="qual-row">Sähköasentaja — S2-sähköluvat</div>
+        <div class="qual-row">Lentokoneasennuksen perustutkinto</div>
+        <div class="qual-row">Konetekniikan insinööri</div>
+        <div class="qual-row">Talotekniikan opettaja</div>
+        <div class="qual-row">Veneenrakentaja</div>
+      </div>
+      <div class="cert-strip">
+        <span class="cert-pill">S2</span>
+        <span class="cert-pill">Kylmäainelupa</span>
+        <span class="cert-pill">Automaatio</span>
+        <span class="cert-pill">Lentotekniikka</span>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-name">Vesa Peltokangas</div>
+      <div class="team-role">Insinööri · Teknikko · 40+ v. kokemus</div>
+      <div class="team-quals">
+        <div class="qual-row">Insinööri (AMK), Kone- ja tuotantotekniikka 2000</div>
+        <div class="qual-row">Teknikko, Auto- ja työkonetekniikka 1993</div>
+        <div class="qual-row">Dieselasentaja 1989</div>
+        <div class="qual-row">Maatalouskoneasentaja 1984</div>
+        <div class="qual-row">Pedagogiset opinnot, opettaja 1987–</div>
+        <div class="qual-row">Korjaamoyrittäjä 1987–1997</div>
+        <div class="qual-row">Luonto-ohjaaja, hevosenhoitaja</div>
+      </div>
+      <div class="cert-strip">
+        <span class="cert-pill">Insinööri AMK</span>
+        <span class="cert-pill">Konetekniikka</span>
+        <span class="cert-pill">Opettaja</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="how">
+  <div class="sec-tag">Toimintatapa</div>
+  <h2 class="sec-heading">Näin toimimme</h2>
+  <div class="how-steps">
+    <div class="how-step">
+      <div class="step-n">01</div>
+      <span class="step-ico">📞</span>
+      <div class="step-t">Yhteydenotto</div>
+      <div class="step-d">Soita tai lähetä viesti. Kuvataan työ — puhelin vastaa suoraan.</div>
+    </div>
+    <div class="how-step">
+      <div class="step-n">02</div>
+      <span class="step-ico">📋</span>
+      <div class="step-t">Kartoitus</div>
+      <div class="step-d">Käymme kohteessa tai käymme tarpeen läpi yhdessä — selkeä tarjous ennen töitä.</div>
+    </div>
+    <div class="how-step">
+      <div class="step-n">03</div>
+      <span class="step-ico">🔧</span>
+      <div class="step-t">Toteutus</div>
+      <div class="step-d">Asennus ja suunnittelu sovitussa aikataulussa, lupia ja normeja noudattaen.</div>
+    </div>
+    <div class="how-step">
+      <div class="step-n">04</div>
+      <span class="step-ico">✅</span>
+      <div class="step-t">Luovutus</div>
+      <div class="step-d">Työ tarkastetaan, dokumentoidaan ja luovutetaan — täydellinen läpinäkyvyys.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE AREA -->
+<section id="alue" class="area-section">
+  <div class="sec-tag">Palvelualue</div>
+  <h2 class="sec-heading">Toiminta-alue</h2>
+  <div class="area-grid">
+    <div>
+      <p class="sec-sub">Kotipaikka Karvala, palvelemme koko Etelä-Pohjanmaata ja lähialueet — vaativiin kohteisiin myös laajemmin.</p>
+      <div class="area-towns">
+        <span class="town-tag">Karvala</span>
+        <span class="town-tag">Kaustinen</span>
+        <span class="town-tag">Kokkola</span>
+        <span class="town-tag">Seinäjoki</span>
+        <span class="town-tag">Vaasa</span>
+        <span class="town-tag">Ylivieska</span>
+        <span class="town-tag">Veteli</span>
+        <span class="town-tag">Lestijärvi</span>
+        <span class="town-tag">Soite-alue</span>
+        <span class="town-tag">Tarvittaessa laajemmin</span>
+      </div>
+    </div>
+    <div class="map-placeholder">
+      <span>📍</span>
+      <p>Mäkitie 12<br>62630 Karvala<br><small style="color:var(--slate);">Google Maps -upotus lisätään tähän</small></p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="yhteys">
+  <div class="contact-grid">
+    <div>
+      <div class="sec-tag">Yhteydenotto</div>
+      <h2 class="sec-heading">Otetaan<br>yhteyttä.</h2>
+      <p class="sec-sub">Soita suoraan tai jätä yhteydenottopyyntö — vastaamme nopeasti. Tarjous aina ennen töiden aloittamista.</p>
+      <div class="contact-block">
+        <div class="cb-icon">📞</div>
+        <div>
+          <div class="cb-label">Puhelin</div>
+          <div class="cb-value"><a href="tel:0407040198">040 704 0198</a></div>
+        </div>
+      </div>
+      <div class="contact-block">
+        <div class="cb-icon">✉️</div>
+        <div>
+          <div class="cb-label">Sähköposti</div>
+          <div class="cb-value"><a href="mailto:nikopeltokangas@outlook.com">nikopeltokangas@outlook.com</a></div>
+        </div>
+      </div>
+      <div class="contact-block">
+        <div class="cb-icon">📍</div>
+        <div>
+          <div class="cb-label">Osoite</div>
+          <div class="cb-value">Mäkitie 12, 62630 Karvala</div>
+        </div>
+      </div>
+    </div>
+    <form class="form-wrap" onsubmit="handleForm(event)">
+      <div class="form-row-2">
+        <div class="fg" style="margin-bottom:0;">
+          <label>Etunimi</label>
+          <input type="text" placeholder="Etunimi" required>
+        </div>
+        <div class="fg" style="margin-bottom:0;">
+          <label>Sukunimi</label>
+          <input type="text" placeholder="Sukunimi">
+        </div>
+      </div>
+      <div class="form-row-2" style="margin-bottom:0;">
+        <div class="fg" style="margin-bottom:0;">
+          <label>Puhelin</label>
+          <input type="tel" placeholder="040 ..." required>
+        </div>
+        <div class="fg" style="margin-bottom:0;">
+          <label>Sähköposti</label>
+          <input type="email" placeholder="nimi@email.fi">
+        </div>
+      </div>
+      <div class="fg">
+        <label>Palvelu</label>
+        <select required>
+          <option value="" disabled selected>Valitse palvelu</option>
+          <option>❄️ Kylmäkoneasennus</option>
+          <option>⚡ Sähköasennus</option>
+          <option>⚙️ Konetekniikka / Projektijohtaminen</option>
+          <option>🔧 Useampi palvelu</option>
+          <option>❓ En ole varma — tarvitsen neuvoa</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Kuvaus</label>
+        <textarea placeholder="Kerro lyhyesti kohteesta tai tarpeesta — sijainti, työn laajuus, aikataulu..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Lähetä yhteydenottopyyntö →</button>
+      <p style="font-size:0.75rem;color:var(--slate);margin-top:0.85rem;text-align:center;">Vastaamme yleensä saman päivän aikana.</p>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="logo">Peltokangas <span>Kylmäkoneet</span></a>
+      <p class="footer-desc">Kylmäkoneasennus, sähköasennus ja konetekniikka Etelä-Pohjanmaalla. Luotettava ammattilainen Karvalasta.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Palvelut</div>
+      <ul class="footer-links">
+        <li><a href="#palvelut">Kylmäkoneasennus</a></li>
+        <li><a href="#palvelut">Sähköasennus</a></li>
+        <li><a href="#palvelut">Konetekniikka</a></li>
+        <li><a href="#palvelut">Projektijohtaminen</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Yhteystiedot</div>
+      <ul class="footer-links">
+        <li><a href="tel:0407040198">040 704 0198</a></li>
+        <li><a href="mailto:nikopeltokangas@outlook.com">nikopeltokangas@outlook.com</a></li>
+        <li><a href="#">Mäkitie 12, 62630 Karvala</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Konetekniikka Peltokangas OY <span class="ytunnus">· Y-tunnus 2758778-8</span></span>
+    <span>Karvala, Etelä-Pohjanmaa</span>
+  </div>
+</footer>
+
+<div class="sticky">
+  <a href="tel:0407040198">📞 Soita nyt</a>
+</div>
+
+<script>
+function handleForm(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  btn.textContent = '✓ Viesti lähetetty — otamme yhteyttä pian';
+  btn.style.background = '#166534'; btn.style.color = '#fff';
+  btn.disabled = true;
+}
+</script>
+</body>
+</html>
